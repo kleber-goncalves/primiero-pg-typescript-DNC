@@ -1,50 +1,74 @@
-# primeiros passos
+# Projeto: primeiros passos com TypeScript (Back-end)
 
-1- executar npm init -y : para criar o package.json
+Descrição
+ - **Projeto**: Exemplo simples de back-end em TypeScript feito durante o curso "Introdução ao TypeScript para Back-End" da DNC.
+ - **Objetivo**: demonstrar estrutura mínima de uma API com Express, organização por DTOs, handlers e helpers, e fluxo de build em TypeScript.
 
-2- npm i express : para instalar a o express
+Sobre o curso
+ - O projeto acompanha os conceitos do curso: configuração do TypeScript, tipagem para Express, organização de rotas/DTOs e execução em modo de desenvolvimento e produção.
 
-3- npm i dotenv : para instalar o env
+Pré-requisitos
+ - Node.js (>= 18 recomendado)
+ - npm
 
-preparar o ambiente do typescript
+Instalação
+1. Instale dependências:
 
-1- npm i -D typescript : para instalar o typescript
+```
+npm install
+```
 
-2- npm i @types/express : para instalar os tipos do express na versão typescript
+2. Dependências de desenvolvimento (já presentes no projeto):
 
-3- npm i @types/node : é a mesma coisa que fez no 2° passo so que agora é para o node
+```
+npm install --save-dev typescript ts-node @types/express @types/node
+```
 
-para começar(rodar) o typescript
+Scripts úteis (definidos em `package.json`)
+- **build**: `npx tsc` — compila TypeScript para JavaScript.
+- **start**: `node dist/index.js` — executa a versão compilada (produção).
+- **dev**: `nodemon src/index.ts` — desenvolvimento com recarga automática.
 
-1- npx tsc --init
+Observação importante
+- O arquivo `tsconfig.json` atualmente possui `outDir` configurado como `./build`, mas o script `start` espera a saída em `dist` (`node dist/index.js`). Recomenda-se alinhar um dos dois:
+  - alterar `tsconfig.json` para `"outDir": "./dist"`, ou
+  - alterar o script `start` em `package.json` para `node build/index.js`.
 
-2 - no arquivo tsconfig.json, procure por:
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+Estrutura do projeto (resumo)
+- **src/index.ts**: ponto de entrada da aplicação.
+- **src/dtos/**: definições de tipos/DTOs para requests e responses.
+- **src/helpers/**: funções utilitárias (ex.: cálculos, formatações).
+- **src/utils/**: handlers para rotas (getHandler, postHandler).
 
-e mude para :
-    "rootDir": "./src",
-    "outDir": "./build",
+Como executar
+ - Desenvolvimento (hot-reload):
 
-3 - no arquivo package.json procure por :
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+```
+npm run dev
+```
 
-e mude para : 
-        "scripts": {
-        "build": "npx tsc",
-        "start": "node dist/index.js",
-        "dev": "nodemon src/index.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-e instale o nodemon : 
-    npm i nodemon -g
+ - Build e execução em produção:
 
-e depois instale :
-     npm i -D ts-node
+```
+npm run build
+npm start
+```
 
+O que o projeto implementa
+ - Handlers básicos para requisições GET e POST (veja `src/utils/getHandler.ts` e `src/utils/postHandler.ts`).
+ - DTOs para validar/organizar forma de entrada e saída em `src/dtos`.
+ - Helpers para cálculos e formatação em `src/helpers`.
 
-------------------
+Próximos passos sugeridos
+ - Escolher e alinhar o `outDir` (`dist` ou `build`) para evitar inconsistências.
+ - Adicionar exemplos de rotas no README com URLs e payloads.
+ - Incluir um arquivo `.env.example` se usar variáveis de ambiente.
 
-A pasta : dtos. serve para quardar as rotas de APIs
+Contribuição
+ - Crie um branch, faça commits e abra um pull request.
+
+Licença
+ - (Adicione aqui a licença do projeto, se houver.)
+
+---
+Arquivo original: estrutura de instruções com passos iniciais para configurar TypeScript e dependências.
